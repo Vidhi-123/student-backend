@@ -31,6 +31,7 @@ var attendance_present=require('./routes/attendance_present_router');
 var addattendance=require('./routes/attendance_add_data_router');
 var attadd=require('./routes/attendance_router3');
 var fees=require('./routes/fees_router');
+var admin_fees=require('./routes/admin_fees_router');
 var wholefees=require('./routes/whole_fees_remaining.router');
 var getfees=require('./routes/getallstudentfess_router');
 var student=require('./routes/student_router');
@@ -44,6 +45,8 @@ var examresultmergedataadd=require('./routes/examresultstuadd_router');
 var student_login=require('./routes/student_login');
 var student_front_display=require('./routes/student_frontdisplay_router');
 var student_attendance_ionic=require('./routes/attendancestudentionic_router');
+var studentfees=require('./routes/feesstudent_router');
+var studentfeesdetail=require('./routes/feesdetailstudent_router')
 var app = express();
 
 // view engine setup
@@ -83,6 +86,7 @@ app.use('/attendance_present',attendance_present);
 app.use('/addattendance',addattendance);
 app.use('/attadd',attadd);
 app.use('/fees',fees);
+app.use('/admin_fees',admin_fees);
 app.use('/wholefees',wholefees);
 app.use('/getfees',getfees)
 app.use('/student',student)
@@ -96,6 +100,8 @@ app.use('/examresultmergedataadd',examresultmergedataadd)
 app.use('/studentlogin',student_login)
 app.use('/studentfrontdisplay',student_front_display);
 app.use('/attendancestudent',student_attendance_ionic);
+app.use('/studentfees',studentfees);
+app.use('/studentfeesdetail',studentfeesdetail);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

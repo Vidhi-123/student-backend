@@ -4,12 +4,12 @@ var demo={
         var transporter=nodemailer.createTransport({
             service:'gmail',
             auth:{
-                user:'vidhipshah10@gmail.com',
-                pass:"vidhi@123"
+                user:'mathsacademy20@gmail.com',
+                pass:"vidhi@12345678"
             }
         });
         var mailOptions={
-            from:'vidhipshah10@gmail.com',
+            from:'mathsacademy20@gmail.com',
             to:demo.to,
             subject:demo.subject,
             text:demo.message
