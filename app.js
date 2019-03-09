@@ -51,6 +51,10 @@ var student_subject_display=require('./routes/student_subject_display_router');
 var dailyWorkIonic=require('./routes/dailywork_ionic');
 var studentIonic=require('./routes/studentIonic_router');
 var studentIonicimage=require('./routes/student_ionic_image_router');
+var assignmentIonic=require('./routes/assignment_ionic_router');
+var scheduleIonic=require('./routes/schedule_ionic_router');
+var feesionic=require('./routes/fees_ionic_router');
+var studentsubject=require('./routes/studentsubject_router');
 var app = express();
 
 // view engine setup
@@ -101,7 +105,7 @@ app.use('/exam_schedule_mergedata',exam_schedule_mergedata)
 app.use('/exam_result',exam_result)
 app.use('/examresultmerge',examresultmerge)
 app.use('/examresultmergedataadd',examresultmergedataadd)
-app.use('/studentlogin',student_login)
+app.use('/studentlogin',student_login);
 app.use('/studentfrontdisplay',student_front_display);
 app.use('/attendancestudent',student_attendance_ionic);
 app.use('/studentfees',studentfees);
@@ -110,6 +114,10 @@ app.use('/student_subject_display',student_subject_display);
 app.use('/dailyWorkIonic',dailyWorkIonic);
 app.use('/studentionic',studentIonic);
 app.use('/studentimage',studentIonicimage);
+app.use('/assignmentIonic',assignmentIonic);
+app.use('/scheduleionic',scheduleIonic);
+app.use('/feesionic',feesionic);
+app.use('/studentsubject',studentsubject)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

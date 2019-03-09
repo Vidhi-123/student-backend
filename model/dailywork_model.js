@@ -3,7 +3,7 @@ var dailywork={
     addDailyWork:function(item,filename,callback){
         console.log(item);
         var today=new Date();
-        return db.query("insert into dailywork_table (image,fk_standard_id,fk_subject_id,fk_batch_id,title,daily_date) values (?,?,?,?,?,?)",[filename,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.title,today],callback)
+        return db.query("insert into dailywork_table (pdf,fk_standard_id,fk_subject_id,fk_batch_id,title,daily_date) values (?,?,?,?,?,?)",[filename,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.title,today],callback)
     },
     
     getAllDailyWork(callback){
@@ -14,7 +14,7 @@ var dailywork={
         return db.query("update dailywork_table set title=?,fk_standard_id=?,fk_subject_id=?,fk_batch_id=? where work_id=?",[item.title,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,work_id],callback);
     },
     updateDailyWorkImage:function(item,filename,callback){
-        return db.query("update dailywork_table set image=?,title=?,fk_standard_id=?,fk_subject_id=?,fk_batch_id=? where work_id=?",[filename,item.title,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.work_id],callback)
+        return db.query("update dailywork_table set pdf=?,title=?,fk_standard_id=?,fk_subject_id=?,fk_batch_id=? where work_id=?",[filename,item.title,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.work_id],callback)
     },
     getBatchByStandardID:function(standard_id,callback){
         return db.query('select s.*,b.* from standard_table s,batch_table b where s.standard_id=? and s.standard_id=b.fk_standard_id ',[standard_id],callback);
@@ -40,16 +40,15 @@ var dailywork={
        
     },
     getDailyWorkIonic:function(student_id,callback){
-        return db.query("select stu.*,sub.*,subj.*,daily.* from  student_table stu,sub_table sub,subject_table subj,dailywork_table daily where stu.student_id=sub.fk_student_id and subj.subject_id=sub.fk_subject_id and daily.work_id=stu.fk_work_id and stu.student_id=?",[student_id],callback);
+        return db.query("SELECT subj.* , sub.* from subject_table subj , sub_table sub where subj.subject_id=sub.fk_subject_id and sub.fk_student_id=?",[student_id],callback);
     },
     getDailyworkIonicById:function(item,callback){
 
 
         console.log(item);
-        return db.query("select * from dailywork_table where fk_standard_id=? and fk_subject_id=? and fk_batch_id=? and fk_student_id=?",[item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.fk_student_id],callback);
+        return db.query("select * from dailywork_table where fk_standard_id=? and fk_subject_id=? and fk_batch_id=? ",[item.fk_standard_id,item.fk_subject_id,item.fk_batch_id],callback);
     
-}
-  
+    }
     };
 
 

@@ -7,10 +7,15 @@ var student={
         return db.query("select * from student_table where student_id=? and student_password=?",[item.student_id,item.student_password],callback);
     
 },
-    addStudent:function(item,callback){
+getSubjectByStandard:function(standard_id,callback){
+    return db.query("select sub.subject_name,s.* from subject_table sub,standard_table s where s.standard_id=sub.fk_standard_id and s.standard_id=?",[standard_id],callback);
+},
+    addStudent:function(item,callback)
+    {
+
         var join_date=new Date(item.joining_date);
         var dob=new Date(item.date_of_birth);
-        return db.query("insert into student_table (student_name,student_password,joining_date,date_of_birth,fk_standard_id,fk_batch_id,maths,science,english,physics,biology) values (?,?,?,?,?,?,?,?,?,?,?) ",[item.student_name,item.student_password,join_date,dob,item.fk_standard_id,item.fk_batch_id,item.maths,item.science,item.english,item.physics,item.biology],callback);
+        return db.query("insert into student_table (student_name,student_password,joining_date,date_of_birth,fk_standard_id,fk_batch_id) values (?,?,?,?,?,?) ",[item.student_name,item.student_password,join_date,dob,item.fk_standard_id,item.fk_batch_id],callback);
     },
     DeleteStudent(student_id,callback){
         return db.query('delete from student_table where student_id=?',[student_id],callback);
@@ -50,6 +55,7 @@ var student={
         var dob=new Date(item.date_of_birth);
         return db.query("update student_table set student_image=?,student_name=?,student_password=?,date_of_birth=? where student_id=?",[filename,item.student_name,item.student_password,dob,item.student_id],callback)
     },
+   
 
   
 };

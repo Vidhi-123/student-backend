@@ -12,7 +12,7 @@ var assignment={
     addAssignment:function(item,filename,callback){
         console.log(item);
         var today=new Date();
-        return db.query("insert into assignment_table (image,fk_standard_id,fk_subject_id,fk_batch_id,title,submisson_date) values (?,?,?,?,?,?)",[filename,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.title,today],callback)
+        return db.query("insert into assignment_table (assignment_pdf,fk_standard_id,fk_subject_id,fk_batch_id,title,submisson_date) values (?,?,?,?,?,?)",[filename,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.title,today],callback)
     },
     updateAssignment:function(item,assignment_id,callback){
         return db.query("update assignment_table set title=?,fk_standard_id=?,fk_subject_id=?,fk_batch_id=? where assignment_id=?",[item.title,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,assignment_id],callback);
@@ -33,6 +33,13 @@ var assignment={
         }
        return db.query("delete from assignment_table where assignment_id in (?)",[delarr],callback);
        
+    },
+    getAssignmentIonic:function(student_id,callback){
+        return db.query("select stu.*,sub.*,subj.*,assign.* from  student_table stu,sub_table sub,subject_table subj,assignment_table assign where stu.student_id=sub.fk_student_id and subj.subject_id=sub.fk_subject_id and assign.assignment_id=sub.fk_assignment_id and stu.student_id=?",[student_id],callback);
+    },
+    getAssignmentIonicById:function(item,callback){
+        console.log(item);
+        return db.query("select * from assignment_table where fk_standard_id=? and fk_subject_id=? and fk_batch_id=? ",[item.fk_standard_id,item.fk_subject_id,item.fk_batch_id],callback);
     }
 }
 module.exports=assignment;

@@ -27,6 +27,9 @@ getStudentByFeesId:function(student_id,callback){
 getStudentDetailsByFeesId:function(student_id,callback){
     return db.query("select s.student_name,f.student_fees_id,sfd.* from student_table s,student_fees f,student_fees_detail sfd where f.student_fees_id=sfd.fk_student_fees_id and s.student_id=?",[student_id],callback);
 
+},
+getStudentInstalmentsIonic:function(student_id,callback){
+    return db.query("select s.student_name,f.student_fees_id,sfd.* from student_table s,student_fees f,student_fees_detail sfd where f.student_fees_id=sfd.fk_student_fees_id and s.student_id=f.fk_student_id and s.student_id=?",[student_id],callback)
 }
 
 

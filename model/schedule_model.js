@@ -35,6 +35,14 @@ var schedule={
         }
        return db.query("delete from schedule_table where schedule_id in (?)",[delarr],callback);
        
+    },
+    getAllBatch:function(callback){
+        return db.query("select * from batch_table",callback);
+    },
+    getScheduleIonicById:function(batch_id,callback){
+        return db.query("select sche.*,b.*,sub.subject_name from schedule_table sche,batch_table b,subject_table sub where b.batch_id=sche.fk_batch_id and sub.subject_id=sche.fk_subject_id and b.batch_id=?",[batch_id],callback);
     }
+  
+
 }
 module.exports=schedule
