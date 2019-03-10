@@ -7,12 +7,13 @@ var student={
         return db.query("select * from student_table where student_id=? and student_password=?",[item.student_id,item.student_password],callback);
     
 },
-getSubjectByStandard:function(standard_id,callback){
-    return db.query("select sub.subject_name,s.* from subject_table sub,standard_table s where s.standard_id=sub.fk_standard_id and s.standard_id=?",[standard_id],callback);
+    getSubjectByStandard:function(standard_id,callback){
+    return db.query("select sub.*,s.* from subject_table sub,standard_table s where s.standard_id=sub.fk_standard_id and s.standard_id=?",[standard_id],callback);
 },
     addStudent:function(item,callback)
     {
 
+        console.log(item);
         var join_date=new Date(item.joining_date);
         var dob=new Date(item.date_of_birth);
         return db.query("insert into student_table (student_name,student_password,joining_date,date_of_birth,fk_standard_id,fk_batch_id) values (?,?,?,?,?,?) ",[item.student_name,item.student_password,join_date,dob,item.fk_standard_id,item.fk_batch_id],callback);
@@ -41,7 +42,7 @@ getSubjectByStandard:function(standard_id,callback){
     },
 
     getStudentFront:function(student_id,callback){
-        return db.query("select st.*,b.batch_name,s.standard_no,ss.* from student_table st,batch_table b,standard_table s,student_adopt_subject ss where b.batch_id=st.fk_batch_id and s.standard_id=st.fk_standard_id and ss.subject_id=st.fk_subject_id and st.student_id=?",[student_id],callback);
+        return db.query("select st.*,b.batch_name,s.standard_no from student_table st,batch_table b,standard_table s where b.batch_id=st.fk_batch_id and s.standard_id=st.fk_standard_id and st.student_id=?",[student_id],callback);
     },
     getStudentFrontByID:function(student_id,callback){
         return db.query("select stu.*,sub.*,subject.* from  student_table stu,sub_table sub,subject_table subject where stu.student_id=sub.fk_student_id and subject.subject_id=sub.fk_subject_id and stu.student_id=?",[student_id],callback);

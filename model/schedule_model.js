@@ -14,6 +14,7 @@ var schedule={
     },
     addSchedule:function(item,callback){
         var today=new Date(item.schedule_date);
+        console.log(today);
          return db.query('insert into schedule_table (schedule_date,timings,fk_subject_id,fk_standard_id,fk_batch_id,fk_faculty_id) values (?,?,?,?,?,?) ',[today,item.timings,item.fk_subject_id,item.fk_standard_id,item.fk_batch_id,item.fk_faculty_id],callback);
      },
      updateSchedule:function(item,schedule_id,callback){

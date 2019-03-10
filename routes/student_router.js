@@ -37,6 +37,7 @@ student.getStudent(function(err,rows){
 
 router.post('/',function(req,res,next){
     student.addStudent(req.body,function(err,rows){
+        console.log(req.body);
          if(err)
          {
              res.json(err)
