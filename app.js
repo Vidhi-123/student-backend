@@ -55,6 +55,11 @@ var assignmentIonic=require('./routes/assignment_ionic_router');
 var scheduleIonic=require('./routes/schedule_ionic_router');
 var feesionic=require('./routes/fees_ionic_router');
 var studentsubject=require('./routes/studentsubject_router');
+var scheduleionic1=require('./routes/schedule1_ionic_router');
+var studentcount=require('./routes/total_student_router');
+var studentresult=require('./routes/exam_result_ionic_router');
+var exambatch=require('./routes/exam_schedule_ionic_getstu');
+var examstudent=require('./routes/exam_schedule_ionic_batch');
 var app = express();
 
 // view engine setup
@@ -117,7 +122,12 @@ app.use('/studentimage',studentIonicimage);
 app.use('/assignmentIonic',assignmentIonic);
 app.use('/scheduleionic',scheduleIonic);
 app.use('/feesionic',feesionic);
-app.use('/studentsubject',studentsubject)
+app.use('/studentsubject',studentsubject);
+app.use('/scheduleionic1',scheduleionic1);
+app.use('/totalstudent',studentcount);
+app.use('/studentresult',studentresult);
+app.use('/exambatch',exambatch);
+app.use('/examstudent',examstudent);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

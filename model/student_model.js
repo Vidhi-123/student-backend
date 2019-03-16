@@ -1,7 +1,7 @@
 var db=require('../dbconnection');
 var student={
     getStudent:function(callback){
-        return db.query("select st.*,b.batch_name,s.standard_no,ss.* from student_table st,batch_table b,standard_table s,student_adopt_subject ss where b.batch_id=st.fk_batch_id and s.standard_id=st.fk_standard_id and ss.subject_id=st.fk_subject_id",callback);
+        return db.query("select st.*,b.batch_name,s.standard_no from student_table st,batch_table b,standard_table s where b.batch_id=st.fk_batch_id and s.standard_id=st.fk_standard_id",callback);
     },
     getStudentByLoginId:function(item,callback){
         return db.query("select * from student_table where student_id=? and student_password=?",[item.student_id,item.student_password],callback);
@@ -9,6 +9,9 @@ var student={
 },
     getSubjectByStandard:function(standard_id,callback){
     return db.query("select sub.*,s.* from subject_table sub,standard_table s where s.standard_id=sub.fk_standard_id and s.standard_id=?",[standard_id],callback);
+},
+getTotalStudent:function(callback){
+return db.query("select count(student_id) 'total' from student_table",callback);
 },
     addStudent:function(item,callback)
     {

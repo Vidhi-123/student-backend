@@ -30,6 +30,12 @@ var examschedule={
         }
        return db.query("delete from exam_schedule_table where exam_id in (?)",[delarr],callback);
        
+    },
+    getStudentByBatch:function(student_id,callback){
+        return db.query("select b.*,s.* from batch_table b,student_table s where b.batch_id=s.fk_batch_id and s.student_id=?",[student_id],callback);
+    },
+    getExamScheduleIonicById:function(batch_id,callback){
+        return db.query("select b.*,ex_sche.*,subj.* from batch_table b,exam_schedule_table ex_sche,subject_table subj where b.batch_id=ex_sche.fk_batch_id and ex_sche.fk_subject_id=subj.subject_id and b.batch_id=?",[batch_id],callback);
     }
     
 }

@@ -7,6 +7,7 @@ var examresult={
         return db.query("select examschedule.*,examresult.*,student.*,subject.subject_name from exam_schedule_table examschedule,exam_table examresult,student_table student,subject_table subject where examschedule.exam_id=examresult.fk_exam_id and student.student_id=examresult.fk_student_id and  subject.subject_id=examschedule.fk_subject_id and examresult.result_id=?",[result_id],callback) 
     },
     addExamResult:function(item,callback){
+       
         return db.query("insert into exam_table (result_id,marks_obtained,fk_exam_id,fk_student_id) values (?,?,?,?)",[item.result_id,item.marks_obtained,item.fk_exam_id,item.fk_student_id],callback)
     },
     updateExamResult:function(item,result_id,callback){
@@ -23,7 +24,11 @@ var examresult={
     },
     getAllStudent:function(callback){
         return db.query("select * from student_table",callback);
+    },
+    getResultByStudentId:function(student_id,callback){
+        return db.query("select e.*,r.*,s.*,subj.* from exam_table e,exam_schedule_table r,student_table s,subject_table subj where r.exam_id=e.fk_exam_id and subj.subject_id=r.fk_subject_id and s.student_id=e.fk_student_id and s.student_id=?",[student_id],callback)
     }
+
     
 }
 module.exports=examresult

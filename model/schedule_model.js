@@ -40,8 +40,11 @@ var schedule={
     getAllBatch:function(callback){
         return db.query("select * from batch_table",callback);
     },
+    getStudentByBatch:function(student_id,callback){
+        return db.query("select b.*,s.* from batch_table b,student_table s where b.batch_id=s.fk_batch_id and s.student_id=?",[student_id],callback);
+    },
     getScheduleIonicById:function(batch_id,callback){
-        return db.query("select sche.*,b.*,sub.subject_name from schedule_table sche,batch_table b,subject_table sub where b.batch_id=sche.fk_batch_id and sub.subject_id=sche.fk_subject_id and b.batch_id=?",[batch_id],callback);
+        return db.query("select b.*,sche.*,subj.* from batch_table b,schedule_table sche,subject_table subj where b.batch_id=sche.fk_batch_id and sche.fk_subject_id=subj.subject_id and b.batch_id=?",[batch_id],callback);
     }
   
 
