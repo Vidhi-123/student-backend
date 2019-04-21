@@ -9,7 +9,8 @@ var router=express.Router();
                 {
                     res.json(err)
                 }
-                else{
+                else
+                {
                     res.json(rows)
                 }
             });

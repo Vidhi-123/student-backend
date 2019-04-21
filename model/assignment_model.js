@@ -12,7 +12,7 @@ var assignment={
     addAssignment:function(item,filename,callback){
         console.log(item);
         var today=new Date();
-        return db.query("insert into assignment_table (assignment_pdf,fk_standard_id,fk_subject_id,fk_batch_id,title,submisson_date) values (?,?,?,?,?,?)",[filename,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.title,today],callback)
+        return db.query("insert into assignment_table (pdf,fk_standard_id,fk_subject_id,fk_batch_id,title,submisson_date) values (?,?,?,?,?,?)",[filename,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,item.title,today],callback)
     },
     updateAssignment:function(item,assignment_id,callback){
         return db.query("update assignment_table set title=?,fk_standard_id=?,fk_subject_id=?,fk_batch_id=? where assignment_id=?",[item.title,item.fk_standard_id,item.fk_subject_id,item.fk_batch_id,assignment_id],callback);

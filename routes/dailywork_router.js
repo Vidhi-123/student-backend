@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
     });
     var upload = multer({storage: storage});
     router.post('/',upload.single('image'),function(req,res,next){
-        dailyWorkAdd.addDailyWork(req.body,req.file.filename,function(err,rows){
+    dailyWorkAdd.addDailyWork(req.body,req.file.filename,function(err,rows){
             
             if(err)
             {
@@ -26,6 +26,8 @@ var storage = multer.diskStorage({
             }
         });
     });
+
+    
     router.get('/:standard_id?',function(req,res,next){
        
             dailyWorkAdd.getBatchByStandardID(req.params.standard_id,function(err,rows){

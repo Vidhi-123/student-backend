@@ -59,7 +59,10 @@ return db.query("select count(student_id) 'total' from student_table",callback);
         var dob=new Date(item.date_of_birth);
         return db.query("update student_table set student_image=?,student_name=?,student_password=?,date_of_birth=? where student_id=?",[filename,item.student_name,item.student_password,dob,item.student_id],callback)
     },
-   
+   getStudentByBatchId:function(batch_id,callback)
+   {
+       return db.query('select * from student_table where fk_batch_id=?',[batch_id],callback)
+   }
 
   
 };

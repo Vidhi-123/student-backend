@@ -8,14 +8,14 @@ var attendance={
     {
         console.log(date1);
         var date2=new Date(date1);
-        return db.query('select s.student_name from attendance_table a,student_table s where a.attendance_date=? and a.fk_student_id=s.student_id and a.attendance_status="absent"',[date2],callback);
+        return db.query('select s.student_name from attendance_table a,student_table s where a.attendance_date=? and a.fk_student_id=s.student_id',[date2],callback);
     },
     getAttendanceByNameBatchStandard(callback)
     {
         return db.query('select s.*,b.*,a.*,st.* from student_table s,batch_table b,attendance_table a,standard_table st where s.student_id=a.fk_student_id and a.fk_batch_id=b.batch_id and a.fk_standard_id=st.standard_id',callback)
     },
     getAttendanceBybatchId(batch_id,callback){
-        return db.query('select a.*,s.student_name from attendance_table a,student_table s where a.fk_batch_id=? and a.fk_student_id=s.student_id and a.attendance_status="absent"',[batch_id],callback);
+        return db.query('select a.*,s.student_name from attendance_table a,student_table s where a.fk_batch_id=? and a.fk_student_id=s.student_id ',[batch_id],callback);
     },
     getAddAttendanceBybatchId(batch_id,callback)
     {
@@ -35,9 +35,10 @@ var attendance={
     },
     
     addAttendance:function(item,callback){
+        
         console.log(today);
          var arr=[];
-         for(let i=0;i<item.length;i++){1
+         for(let i=0;i<item.length;i++){
              arr[i]=[today,item[i].attendance_status,item[i].fk_standard_id,item[i].fk_batch_id,1,item[i].fk_student_id];
          }
          console.log(arr);

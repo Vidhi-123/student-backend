@@ -1,5 +1,7 @@
 var db=require('../dbconnection');
 var dailywork={
+
+
     addDailyWork:function(item,filename,callback){
         console.log(item);
         var today=new Date();
@@ -46,8 +48,12 @@ var dailywork={
 
 
         console.log(item);
-        return db.query("select * from dailywork_table where fk_standard_id=? and fk_subject_id=? and fk_batch_id=? ",[item.fk_standard_id,item.fk_subject_id,item.fk_batch_id],callback);
+       
+        return db.query("select * from dailywork_table where fk_standard_id=? and fk_subject_id=? and fk_batch_id=?" ,[item.fk_standard_id,item.fk_subject_id,item.fk_batch_id],callback);
     
+    },
+    getSubjectByStandard(standard_id,callback){
+        return db.query("select s.*,st.* from subject_table s,standard_table st where s.fk_standard_id=st.standard_id and st.standard_id=?",[standard_id],callback);
     }
     };
 

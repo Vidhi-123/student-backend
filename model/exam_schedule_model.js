@@ -20,6 +20,10 @@ var examschedule={
     getBatchStdSub:function(callback){
         return db.query("select examschedule.*,batch.batch_name,standard.standard_no,subject.subject_name from exam_schedule_table examschedule,batch_table batch,standard_table standard,subject_table subject where batch.batch_id=examschedule.fk_batch_id and standard.standard_id=examschedule.fk_standard_id and subject.subject_id=examschedule.fk_subject_id",callback)
     },
+    getExamBySubjectBatch:function(item,callback)
+    {
+        return db.query('SELECT * from exam_schedule_table where fk_batch_id=? and fk_standard_id=?',[item.batch_id,item.standad_id],callback);
+    },
     multipleSchedule:function(item,callback){
         var delarr=[];
         console.log(item);

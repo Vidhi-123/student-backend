@@ -34,6 +34,7 @@ var fees=require('./routes/fees_router');
 var admin_fees=require('./routes/admin_fees_router');
 var wholefees=require('./routes/whole_fees_remaining.router');
 var getfees=require('./routes/getallstudentfess_router');
+var dailysubject=require('./routes/daily_subject_router');
 var student=require('./routes/student_router');
 var deletestudent=require('./routes/multiple_delete_student_router');
 var feesdetail=require('./routes/fees_detail');
@@ -60,6 +61,15 @@ var studentcount=require('./routes/total_student_router');
 var studentresult=require('./routes/exam_result_ionic_router');
 var exambatch=require('./routes/exam_schedule_ionic_getstu');
 var examstudent=require('./routes/exam_schedule_ionic_batch');
+var feesadd=require('./routes/fees_add_router');
+var newfeesadd=require('./routes/fees_new_add_router');
+var getAllMaterial=require('./routes/getAllMaterialRouter');
+var getAllBatch=require('./routes/getAllBatchRouter');
+var getAllExam=require('./routes/getAllExamRouter');
+var getAllStudent=require('./routes/getAllStudentRouter');
+var getallAttendance=require('./routes/getAllAttendanceRouter');
+var getallexamschedule=require('./routes/getAllExamScheduleRouter');
+var studentbatchdisplay=require('./routes/studentbatch_router');
 var app = express();
 
 // view engine setup
@@ -99,6 +109,8 @@ app.use('/attendance_present',attendance_present);
 app.use('/addattendance',addattendance);
 app.use('/attadd',attadd);
 app.use('/fees',fees);
+app.use('/feesadd',feesadd);
+app.use('/dailysubject',dailysubject);
 app.use('/admin_fees',admin_fees);
 app.use('/wholefees',wholefees);
 app.use('/getfees',getfees)
@@ -128,6 +140,14 @@ app.use('/totalstudent',studentcount);
 app.use('/studentresult',studentresult);
 app.use('/exambatch',exambatch);
 app.use('/examstudent',examstudent);
+app.use('/newfeesadd',newfeesadd);
+app.use('/getAllMaterial',getAllMaterial);
+app.use('/getAllBatch',getAllBatch);
+app.use('/getAllStudent',getAllStudent);
+app.use('/getAllExam',getAllExam);
+app.use('/getAllAttendance',getallAttendance);
+app.use('/getAllExamSchedule',getallexamschedule);
+app.use('/studentbatchdisplay',studentbatchdisplay);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
