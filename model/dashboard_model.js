@@ -12,9 +12,9 @@ var dashboard={
     getAllExam(callback){
         return db.query(' SELECT COUNT(exam_id) "exam_id" FROM exam_schedule_table where exam_id<>""',callback);
     },
-    getAllAttendance(batch_id,callback)
+    getAllAttendance(fk_standard_id,callback)
     {
-        return db.query('SELECT a.fk_standard_id,s.student_name,b.batch_name,count(*) as total from attendance_table a,student_table s,batch_table b WHERE b.batch_id=a.fk_batch_id AND a.fk_student_id=s.student_id AND a.attendance_status="absent" AND a.fk_batch_id=? GROUP BY s.student_id',[batch_id],callback);
+        return db.query('SELECT a.fk_standard_id,s.student_name,b.batch_name,count(*) as total from attendance_table a,student_table s,batch_table b WHERE b.batch_id=a.fk_batch_id AND a.fk_student_id=s.student_id AND a.attendance_status="absent" AND a.fk_standard_id=? GROUP BY s.student_id',[fk_standard_id],callback);
     },
     getAllExamSchedule(batch_id,callback)
     {
